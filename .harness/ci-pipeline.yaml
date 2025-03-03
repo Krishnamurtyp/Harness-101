@@ -1,6 +1,6 @@
 pipeline:
-  name: NodeJS Hello World CI
-  identifier: nodejs_hello_world_ci
+  name: NodeJS CI Pipeline
+  identifier: nodejs_ci_pipeline
   projectIdentifier: Harness_101_Integration
   orgIdentifier: default
   properties:
@@ -33,6 +33,14 @@ pipeline:
                     shell: Sh
                     command: |
                       npm test
+              - step:
+                  type: Run
+                  name: Start App
+                  identifier: start_app
+                  spec:
+                    shell: Sh
+                    command: |
+                      npm start & sleep 5  # Start app in background, wait 5s (adjust as needed)
           infrastructure:
             type: Cloud
             spec: {}
