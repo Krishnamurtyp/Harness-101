@@ -2,10 +2,10 @@
   "name": "ci-nodejs",
   "version": "1.0.0",
   "description": "A simple Node.js Hello World app with Express",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "test": "jest --passWithNoTests src/app.test.js",
+    "start": "node index.js",
+    "test": "jest --passWithNoTests",
     "pretest": "npm install"
   },
   "keywords": ["nodejs", "express", "ci"],
@@ -15,8 +15,8 @@
     "express": "^4.18.2"
   },
   "devDependencies": {
-    "jest": "^29.7.0",  // Updated to latest stable version for better compatibility
-    "supertest": "^6.3.3"  // Updated to latest stable version
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3"
   },
   "engines": {
     "node": ">=16.0.0"
