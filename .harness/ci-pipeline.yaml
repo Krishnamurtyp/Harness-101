@@ -1,6 +1,6 @@
 pipeline:
-  name: NodeJS CI Pipeline
-  identifier: nodejs_ci_pipeline
+  name: NodeJS Hello World CI
+  identifier: nodejs_hello_world_ci
   projectIdentifier: Harness_101_Integration
   orgIdentifier: default
   properties:
