@@ -1,20 +1,46 @@
-{
-  "name": "ci-nodejs",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-      "start": "node src",
-      "test": "jest src/app.test.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.18.2"
-  },
-  "devDependencies": {
-    "jest": "^29.2.2",
-    "supertest": "^6.3.1"
-  }
-}
+pipeline:
+  name: NodeJS CI Pipeline
+  identifier: nodejs_ci_pipeline
+  projectIdentifier: Harness_101_Integration
+  orgIdentifier: default
+  properties:
+    ci:
+      codebase:
+        connectorRef: GitHub_Krishnamurtyp_Harness101
+        repoName: Krishnamurtyp/Harness-101
+        build: <+codebase.branch>
+  stages:
+    - stage:
+        name: Build and Test
+        identifier: build_and_test
+        type: CI
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Install Dependencies
+                  identifier: install_dependencies
+                  spec:
+                    shell: Sh
+                    command: |
+                      npm install
+              - step:
+                  type: Run
+                  name: Run Tests
+                  identifier: run_tests
+                  spec:
+                    shell: Sh
+                    command: |
+                      npm test
+              - step:
+                  type: Run
+                  name: Start App
+                  identifier: start_app
+                  spec:
+                    shell: Sh
+                    command: |
+                      npm start & sleep 5  # Start app in background, wait 5s (adjust as needed)
+          infrastructure:
+            type: Cloud
+            spec: {}
