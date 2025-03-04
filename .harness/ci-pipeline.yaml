@@ -8,7 +8,7 @@ pipeline:
       codebase:
         connectorRef: GitHub_Krishnamurtyp_Harness101
         repoName: Krishnamurtyp/Harness-101
-        build: <+input>  # Use runtime input for branch selection
+        build: main  # Hardcoded branch; use <+input> for runtime input if needed
   stages:
     - stage:
         name: Build and Test
@@ -43,8 +43,10 @@ pipeline:
                     command: |
                       npm start & sleep 5
           infrastructure:
-            type: Hosted
+            type: KubernetesDirect  # Or 'VM' or 'UseFromStage' based on your setup
             spec:
+              connectorRef: your_kubernetes_connector_name  # Replace with actual value
+              namespace: your_namespace  # Replace with actual value (e.g., 'default')
               platform:
                 os: Linux
                 arch: Amd64
