@@ -1,14 +1,14 @@
 pipeline:
   name: NodeJS Hello World CI
   identifier: nodejs_hello_world_ci
-  projectIdentifier: Harness101Integration  # Updated to match Harness URL
-  orgIdentifier: default                    # Already correct
+  projectIdentifier: Harness101Integration
+  orgIdentifier: default
   properties:
     ci:
       codebase:
         connectorRef: GitHub_Krishnamurtyp_Harness101
         repoName: Krishnamurtyp/Harness-101
-        build: <+codebase.branch>
+        build: main  # Fixed branch or use <+input> for runtime input
   stages:
     - stage:
         name: Build and Test
@@ -21,6 +21,7 @@ pipeline:
                   type: Run
                   name: Install Dependencies
                   identifier: install_dependencies
+                  timeout: 10m
                   spec:
                     shell: Sh
                     command: npm install
@@ -28,6 +29,7 @@ pipeline:
                   type: Run
                   name: Run Tests
                   identifier: run_tests
+                  timeout: 10m
                   spec:
                     shell: Sh
                     command: npm test
@@ -35,10 +37,14 @@ pipeline:
                   type: Run
                   name: Start App
                   identifier: start_app
+                  timeout: 10m
                   spec:
                     shell: Sh
                     command: |
                       npm start & sleep 5
           infrastructure:
-            type: Cloud
-            spec: {}
+            type: Hosted  # Or 'Docker', 'KubernetesDirect', or 'VM' based on your setup
+            spec:
+              platform:
+                os: Linux
+                arch: Amd64
