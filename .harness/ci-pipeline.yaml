@@ -8,7 +8,7 @@ pipeline:
       codebase:
         connectorRef: GitHub_Krishnamurtyp_Harness101
         repoName: Krishnamurtyp/Harness-101
-        build: main  # Fixed branch or use <+input> for runtime input
+        build: <+input>  # Use runtime input for branch selection
   stages:
     - stage:
         name: Build and Test
@@ -43,7 +43,7 @@ pipeline:
                     command: |
                       npm start & sleep 5
           infrastructure:
-            type: Hosted  # Or 'Docker', 'KubernetesDirect', or 'VM' based on your setup
+            type: Hosted
             spec:
               platform:
                 os: Linux
